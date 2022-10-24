@@ -24,6 +24,7 @@ public class Post {
     private String title;
     private String url;
 
+    @Lob
     @Column(nullable = false)
     private String content;
     private String shortDescription;
