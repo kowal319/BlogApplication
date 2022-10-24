@@ -16,4 +16,18 @@ public class PostMapper {
                 .updatedOn(post.getUpdatedOn())
                 .build();
     }
+
+    //map postDto to post entity
+    public Post mapToPost(PostDto postDto){
+        return Post.builder()
+                .id(postDto.getId())
+                .title(postDto.getTitle())
+                .url(postDto.getUrl())
+                .content(postDto.getContent())
+                .shortDescription(postDto.getShortDescription())
+                .createdOn(postDto.getCreatedOn())
+                .updatedOn(postDto.getUpdatedOn())
+                .build();
+
+    }
 }
