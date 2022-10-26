@@ -3,8 +3,10 @@ package com.example.BlogApplication.controller;
 
 import com.example.BlogApplication.dto.PostDto;
 import com.example.BlogApplication.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,12 +40,18 @@ public class PostController {
 
  //method to handle form submit request
     @PostMapping("/admin/posts")
-    public String createPost(@ModelAttribute PostDto postDto){
+    public String createPost(@Valid @ModelAttribute("post") PostDto postDto,
+                             BindingResult result,
+                             Model model){
+        if(result.hasErrors()){
+            model.addAttribute("post", postDto);
+            return "admin/create_post";
+        }
         postDto.setUrl(getUrl(postDto.getTitle()));
         postService.createPost(postDto);
         return "redirect:/admin/posts";
-
     }
+
     private static String getUrl(String postTitle){
         String title = postTitle.trim().toLowerCase();
         String url = title.replaceAll("\\s+","-");
