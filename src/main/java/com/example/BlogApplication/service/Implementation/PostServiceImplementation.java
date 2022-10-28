@@ -26,10 +26,14 @@ public class PostServiceImplementation implements PostService {
         return posts.stream().map(PostMapper::mapToPostDto)
                 .collect(Collectors.toList());
     }
-
     @Override
     public void createPost(PostDto postDto) {
         Post post = PostMapper.mapToPost(postDto);
         postRepository.save(post);
+    }
+    @Override
+    public PostDto findPostById(Long postId) {
+        Post post = postRepository.findById(postId).get();
+        return PostMapper.mapToPostDto(post);
     }
 }
