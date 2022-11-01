@@ -12,13 +12,15 @@
       <hr/>
       <h4 th:text="${post.shortDescription}"></h4>
       <hr />
-      <div th:utext="${post.content}"></div>
+      <div th:utext="${post.content}">
+      </div>
     </div>
-  <div class="col-md3">
-    <!-- search bar -->
+    <div class="col-md-3">
+      <!-- search bar goes here            <-->
+      <div th:replace="blog/search :: search"></div>
+    </div>
   </div>
 </div>
 <div th:replace="blog/footer :: footer"></div>
-</div>
 </body>
 </html>
