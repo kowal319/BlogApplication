@@ -62,6 +62,21 @@ public class PostController {
         return "admin/edit_post";
     }
 
+    //handler method to handle edit post form submit request
+    @PostMapping("/admin/posts/{postId}")
+    public String updatePost(@PathVariable("postId") Long postId,
+                             @Valid @ModelAttribute("post") PostDto post,
+                             BindingResult result,
+                             Model model){
+        if(result.hasErrors()){
+            model.addAttribute("post", post);
+                    return "admin/edit_post";
+        }
+        post.setId(postId);
+        postService.updatePost(post);
+        return "redirect:/admin/posts";
+    }
+
     private static String getUrl(String postTitle){
         String title = postTitle.trim().toLowerCase();
         String url = title.replaceAll("\\s+","-");
