@@ -91,7 +91,7 @@ public class PostController {
     }
 
     //handler method to handle search request
-    @GetMapping("/admin/post/search")
+    @GetMapping("/admin/posts/search")
     public String searchPost(@RequestParam(value = "query") String query,
                              Model model){
         List<PostDto>posts = postService.searchPosts(query);
