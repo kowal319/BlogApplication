@@ -42,4 +42,9 @@ public class PostServiceImplementation implements PostService {
         Post post = PostMapper.mapToPost(postDto);
         postRepository.save(post);
     }
+
+    @Override
+    public void deletePost(Long postId) {
+        postRepository.deleteById(postId);
+    }
 }
