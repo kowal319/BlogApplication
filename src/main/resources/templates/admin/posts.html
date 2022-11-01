@@ -40,7 +40,7 @@ xmlns:th="http://thymeleaf.org"
       <td th:text="${postStat.count}">1</td>
       <td th:text="${post.title}">Title</td>
       <td th:text="${post.shortDescription}">Short Description</td>
-      <td th:text="${post.createdOn}">Created On</td>
+      <td th:text="${#temporals.format(post.createdOn,'dd MM yyyy')}">Created On</td>
       <td>
         <a th:href="@{/admin/posts/{postId}/edit(postId=${post.id})}" class="btn btn-primary">Edit</a>
         <a th:href="@{/admin/posts/{postId}/delete(postId=${post.id})}" class="btn btn-danger">Delete</a>
@@ -50,7 +50,10 @@ xmlns:th="http://thymeleaf.org"
     </tbody>
   </table>
 </div>
+<br /> <br />
 <br />
+<br />
+
 <div th:replace="admin/footer :: footer">
 </div>
 </body>
