@@ -28,14 +28,14 @@ public class PostController {
     }
 
     //create handler method to add new post
- @GetMapping("/admin/posts/newpost")
+    @GetMapping("/admin/posts/newpost")
     public String newPostForm(Model model){
         PostDto postDto = new PostDto();
         model.addAttribute("post", postDto);
         return "admin/create_post";
- }
+    }
 
- //method to handle form submit request
+    //method to handle form submit request
     @PostMapping("/admin/posts")
     public String createPost(@Valid @ModelAttribute("post") PostDto postDto,
                              BindingResult result,
@@ -66,7 +66,7 @@ public class PostController {
                              Model model){
         if(result.hasErrors()){
             model.addAttribute("post", post);
-                    return "admin/edit_post";
+            return "admin/edit_post";
         }
         post.setId(postId);
         postService.updatePost(post);

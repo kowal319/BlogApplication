@@ -1,5 +1,6 @@
 package com.example.BlogApplication.controller;
 
+import com.example.BlogApplication.dto.CommentDto;
 import com.example.BlogApplication.dto.PostDto;
 import com.example.BlogApplication.service.PostService;
 import org.springframework.stereotype.Controller;
@@ -31,14 +32,16 @@ public class BlogController{
     public String showPost(@PathVariable("postUrl") String postUrl,
                            Model model){
         PostDto post = postService.findPostByUrl(postUrl);
+        CommentDto commentDto = new CommentDto();
         model.addAttribute("post", post);
+        model.addAttribute("comment", commentDto);
         return "blog/blog_post";
     }
 
     //handler method to handle blog search request
     @GetMapping("/page/search")
-        public String searchPosts(@RequestParam(value = "query") String query,
-                                    Model model){
+    public String searchPosts(@RequestParam(value = "query") String query,
+                              Model model){
         List<PostDto> postsResponse = postService.searchPosts(query);
         model.addAttribute("postsResponse", postsResponse);
         return "blog/view_posts";

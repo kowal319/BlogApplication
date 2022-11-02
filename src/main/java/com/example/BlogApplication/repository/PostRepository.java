@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    Optional<Post>findByUrl(String url);
+    Optional<Post> findByUrl(String url);
     @Query("Select p from Post p WHERE "+
-    " p.title LIKE CONCAT('%', :query, '%') OR " +
-    " p.shortDescription LIKE CONCAT('%', :query, '%')")
+            " p.title LIKE CONCAT('%', :query, '%') OR " +
+            " p.shortDescription LIKE CONCAT('%', :query, '%')")
     List<Post> searchPosts(String query);
 }
