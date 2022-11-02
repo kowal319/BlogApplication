@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImplementation implements PostService {
 
-    private PostRepository postRepository;
+private PostRepository postRepository;
 
     public PostServiceImplementation(PostRepository postRepository) {
         this.postRepository = postRepository;

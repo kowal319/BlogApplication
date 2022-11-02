@@ -13,7 +13,6 @@ import java.util.List;
 
 @Controller
 public class PostController {
-
     private PostService postService;
 
     public PostController(PostService postService) {
