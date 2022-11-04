@@ -39,6 +39,13 @@ public class PostController {
         return "admin/comments";
     }
 
+    //handler method to delete comment equest
+    @GetMapping("/admin/posts/comments/{commentId}")
+    public String deleteComment(@PathVariable("commentId") Long commentId){
+        commentService.deleteComment(commentId);
+        return "redirect:/admin/posts/comments";
+    }
+
     //create handler method to add new post
     @GetMapping("/admin/posts/newpost")
     public String newPostForm(Model model){
