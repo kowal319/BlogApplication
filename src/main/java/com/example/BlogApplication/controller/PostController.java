@@ -1,7 +1,9 @@
 package com.example.BlogApplication.controller;
 
 
+import com.example.BlogApplication.dto.CommentDto;
 import com.example.BlogApplication.dto.PostDto;
+import com.example.BlogApplication.service.CommentService;
 import com.example.BlogApplication.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -14,9 +16,11 @@ import java.util.List;
 @Controller
 public class PostController {
     private PostService postService;
+    private CommentService commentService;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, CommentService commentService) {
         this.postService = postService;
+        this.commentService = commentService;
     }
 
     //create handler method, Get request and return model and view
@@ -25,6 +29,14 @@ public class PostController {
         List<PostDto> posts = postService.findAllPosts();
         model.addAttribute("posts", posts);
         return "/admin/posts";
+    }
+
+    //handler method to handle list of comments request
+    @GetMapping("/admin/posts/comments")
+    public String postComments(Model model){
+        List<CommentDto> comments = commentService.findAllComments();
+        model.addAttribute("comments", comments);
+        return "admin/comments";
     }
 
     //create handler method to add new post
