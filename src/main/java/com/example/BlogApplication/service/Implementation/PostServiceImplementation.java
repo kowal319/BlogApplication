@@ -2,9 +2,12 @@ package com.example.BlogApplication.service.Implementation;
 
 import com.example.BlogApplication.dto.PostDto;
 import com.example.BlogApplication.entity.Post;
+import com.example.BlogApplication.entity.User;
 import com.example.BlogApplication.mapper.PostMapper;
 import com.example.BlogApplication.repository.PostRepository;
+import com.example.BlogApplication.repository.UserRepository;
 import com.example.BlogApplication.service.PostService;
+import com.example.BlogApplication.util.SecurityUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +18,11 @@ import java.util.stream.Collectors;
 public class PostServiceImplementation implements PostService {
 
 private PostRepository postRepository;
+private UserRepository userRepository;
 
-    public PostServiceImplementation(PostRepository postRepository) {
+    public PostServiceImplementation(PostRepository postRepository, UserRepository userRepository) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -28,7 +33,10 @@ private PostRepository postRepository;
     }
     @Override
     public void createPost(PostDto postDto) {
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        User user = userRepository.findByEmail(email);
         Post post = PostMapper.mapToPost(postDto);
+        post.setCreatedBy(user);
         postRepository.save(post);
     }
     @Override
