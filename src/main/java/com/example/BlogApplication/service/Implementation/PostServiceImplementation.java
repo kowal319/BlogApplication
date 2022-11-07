@@ -47,7 +47,10 @@ private UserRepository userRepository;
 
     @Override
     public void updatePost(PostDto postDto) {
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        User createdBy = userRepository.findByEmail(email);
         Post post = PostMapper.mapToPost(postDto);
+        post.setCreatedBy(createdBy);
         postRepository.save(post);
     }
 
