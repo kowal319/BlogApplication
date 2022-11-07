@@ -72,4 +72,15 @@ private UserRepository userRepository;
                 .map(PostMapper::mapToPostDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<PostDto> findPostByUser() {
+        String email = SecurityUtils.getCurrentUser().getUsername();
+        User createdBy = userRepository.findByEmail(email);
+        Long userId = createdBy.getId();
+        List<Post> posts =  postRepository.findPostByUser(userId);
+        return  posts.stream()
+                .map((post) -> PostMapper.mapToPostDto(post))
+                .collect(Collectors.toList());
+    }
 }
