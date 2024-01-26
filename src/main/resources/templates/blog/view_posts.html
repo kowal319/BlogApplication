@@ -3,6 +3,30 @@
 <div th:replace="blog/header :: header"></div>
 <body>
 <div th:replace="blog/header :: navbar"></div>
+
+
+<!-- weather -->
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Weather Information</h2>
+            <form th:action="@{/}" th:method="get">
+                <div class="input-group mb-3">
+                    <input type="text" id="city" name="city" class="form-control" th:value="${selectedCity}" placeholder="Enter City" />
+                    <button type="submit" class="btn btn-primary">Get Weather</button>
+                </div>
+            </form>
+            <div th:if="${weather != null}">
+                <p class="mb-1" th:text="'City: ' + ${weather.city}" />
+                <p class="mb-1" th:text="'Temperature: ' + ${weather.temperature} + ' C'" />
+                <!-- Add more weather information as needed -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- Main Content-->
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
